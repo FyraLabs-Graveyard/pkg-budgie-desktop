@@ -1,7 +1,9 @@
 %global _hardened_build 1
 %global _vpath_builddir build
+%undefine _disable_source_fetch
+%global _git_release 1
 
-%global commit 7a5dcfdaa25e887432e7edb3f8aee060992ee1c1
+%global commit 26cde8fd300a87aba0d085ca50c89728150138d2
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
@@ -27,7 +29,7 @@ URL:		https://github.com/solus-project/budgie-desktop
 #    cd ..
 #    mv budgie-desktop budgie-desktop-%{shortcommit}
 #    tar -cJvf budgie-desktop-%{shortcommit}.tar.xz budgie-desktop-%{shortcommit}
-Source0: budgie-desktop-%{shortcommit}.tar.xz
+Source0: %{name}-%{commit}.tar.xz
 %else
 Source0: https://github.com/solus-project/budgie-desktop/releases/download/v%{?version}/budgie-desktop-v%{?version}.tar.xz
 %endif
@@ -50,12 +52,13 @@ BuildRequires:	pkgconfig(libwnck-3.0) >= 3.36.0
 BuildRequires:	pkgconfig(polkit-gobject-1) >= 0.110
 BuildRequires:	pkgconfig(upower-glib) >= 0.99.0
 BuildRequires:	vala >= 0.48.0
+BuildRequires:  cmake
 
-##%if 0%{?fedora} >= 35
-#BuildRequires:	pkgconfig(libmutter-9) >= 3.36.0
-#%endif
+%if 0%{?fedora} >= 35
+BuildRequires:	pkgconfig(libmutter-9) >= 3.36.0
+%endif
 
-%if 0%{?fedora} >= 34
+%if 0%{?fedora} == 34
 BuildRequires:	pkgconfig(libmutter-8) >= 3.36.0
 %endif
 
@@ -124,21 +127,21 @@ This package provides API Documentation for the Budgie Plugin API, in the
 GTK-Doc HTML format.
 
 %package	devel
-Summary:	Development files for the Budgoe Desktop
+Summary:	Development files for the Budgie Desktop
 Requires:	%{name}%{?_isa} = %{version}-%{release}
 %description	devel
 %{summary}
 
 %prep
 %if 0%{?_git_release:1}
-%autosetup -n %{name}-%{shortcommit}
+%autosetup -n %{name}-%{commit}
 %else
 %autosetup
 %endif
 
 %build
 export LC_ALL=en_US.utf8
-%meson -Dwith-desktop-icons=none
+%meson
 %meson_build
 
 %install
