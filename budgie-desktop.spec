@@ -36,6 +36,11 @@ Source0: https://github.com/solus-project/budgie-desktop/releases/download/v%{?v
 Source2:  0001-remove-screenshot-keybinds.patch
 Source3:   0002-default-wallpaper.patch
 
+
+Source11: 10_ultramarine-budgie.gschema.override
+Source15: ultramarine-marina.layout
+
+
 BuildRequires:	pkgconfig(accountsservice) >= 0.6.55
 BuildRequires:	pkgconfig(ibus-1.0) >= 1.5.10
 BuildRequires:	pkgconfig(gdk-x11-3.0) >= 3.24.0
@@ -157,6 +162,12 @@ export LC_ALL=en_US.utf8
 find %{buildroot} -name '*.la' -delete
 #rm %{buildroot}%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
 %find_lang %{name}
+
+mkdir -p %{buildroot}%{_datadir}/glib-2.0/schemas/
+install %{SOURCE11} %{buildroot}%{_datadir}/glib-2.0/schemas/
+mkdir -p %{buildroot}%{_datadir}/budgie-desktop/layouts/
+install %{SOURCE15} %{buildroot}%{_datadir}/budgie-desktop/layouts/
+
 
 %post
 /sbin/ldconfig
