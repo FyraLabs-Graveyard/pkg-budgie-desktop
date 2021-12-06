@@ -2,12 +2,12 @@
 Panels=Bottom Panel
 
 [Bottom Panel]
-Children=AppMenu;Icon Tasklist;Tray;Seperator;Keyboard Layout;Spacer 1;Network;Spacer 2;Clock;Notifications;Raven Trigger
+Children=AppMenu;Icon Tasklist;Tray;Seperator;Keyboard Layout;Spacer 1;Network;Status Indicator;User Indicator;Seperator 2;Clock;Raven Trigger
 Position=Bottom
 Size=50
 
 [AppMenu]
-ID=AppMenu
+ID=Budgie Menu
 menu-icon=/usr/share/pixmaps/fedora-logo-sprite.png
 
 [Icon Tasklist]
@@ -34,16 +34,20 @@ Alignment=end
 ID=Network
 Alignment=end
 
+[Status Indicator]
+ID=Status Indicator
+Alignment=end
+
+[User Indicator]
+ID=User Indicator
+Alignment=end
+
+[Seperator 2]
+ID=Seperator
+Alignment=end
+
 [Clock]
 ID=Clock
-Alignment=end
-
-[Spacer 2]
-ID=Spacer
-Alignment=end
-
-[Notifications]
-ID=Notifications
 Alignment=end
 
 [Raven Trigger]
