@@ -1,0 +1,114 @@
+From 60cc76042bf91c92711a2442fdddeb4b4b500395 Mon Sep 17 00:00:00 2001
+From: Cappy Ishihara <cappy@cappuchino.xyz>
+Date: Mon, 6 Dec 2021 19:34:28 +0700
+Subject: [PATCH] remove screenshot keybinds
+
+---
+ .../com.solus-project.budgie.wm.gschema.xml   | 36 -------------------
+ src/wm/wm.vala                                | 36 -------------------
+ 2 files changed, 72 deletions(-)
+
+diff --git a/src/wm/com.solus-project.budgie.wm.gschema.xml b/src/wm/com.solus-project.budgie.wm.gschema.xml
+index 533e5b8f..47af488a 100644
+--- a/src/wm/com.solus-project.budgie.wm.gschema.xml
++++ b/src/wm/com.solus-project.budgie.wm.gschema.xml
+@@ -110,42 +110,6 @@
+ 			<description>The binding to clear Raven notifications</description>
+ 		</key>
+ 
+-		<key type="as" name="take-full-screenshot">
+-			<default><![CDATA[['Print']]]></default>
+-			<summary>Take screenshot of all displays</summary>
+-			<description>Take screenshot of all displays</description>
+-		</key>
+-
+-		<key type="s" name="full-screenshot-cmd">
+-			<default>'gnome-screenshot'</default>
+-			<summary>Take screenshot of all displays application</summary>
+-			<description>Application that is run when taking a screenshot of all displays</description>
+-		</key>
+-
+-		<key type="as" name="take-region-screenshot">
+-			<default><![CDATA[['<Ctrl>Print']]]></default>
+-			<summary>Take screenshot of selectable region</summary>
+-			<description>Take screenshot of selectable region</description>
+-		</key>
+-
+-		<key type="s" name="take-region-screenshot-cmd">
+-			<default>'gnome-screenshot -a'</default>
+-			<summary>Take screenshot of selectable region application</summary>
+-			<description>Application that is run when taking a screenshot of a selectable region</description>
+-		</key>
+-
+-		<key type="as" name="take-window-screenshot">
+-			<default><![CDATA[['<Alt>Print']]]></default>
+-			<summary>Take screenshot of current window</summary>
+-			<description>Take screenshot of current window</description>
+-		</key>
+-
+-		<key type="s" name="take-window-screenshot-cmd">
+-			<default>'gnome-screenshot -w -b'</default>
+-			<summary>Take screenshot of current window application</summary>
+-			<description>Application that is run when taking a screenshot of the current window</description>
+-		</key>
+-
+ 		<key type="as" name="toggle-notifications">
+ 			<default><![CDATA[['<Super>N']]]></default>
+ 			<summary>The binding to use to toggle Raven notifications</summary>
+diff --git a/src/wm/wm.vala b/src/wm/wm.vala
+index ca163370..33df4276 100644
+--- a/src/wm/wm.vala
++++ b/src/wm/wm.vala
+@@ -265,39 +265,6 @@ namespace Budgie {
+ 			}
+ 		}
+ 
+-		/* Binding for take-full-screenshot */
+-		void on_take_full_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
+-			try {
+-				string cmd=this.settings.get_string("full-screenshot-cmd");
+-				if (cmd != "")
+-					Process.spawn_command_line_async(cmd);
+-			} catch (SpawnError e) {
+-				print("Error: %s\n", e.message);
+-			}
+-		}
+-
+-		/* Binding for take-region-screenshot */
+-		void on_take_region_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
+-			try {
+-				string cmd=this.settings.get_string("take-region-screenshot-cmd");
+-				if (cmd != "")
+-					Process.spawn_command_line_async(cmd);
+-			} catch (SpawnError e) {
+-				print("Error: %s\n", e.message);
+-			}
+-		}
+-
+-		/* Binding for take-window-screenshot */
+-		void on_take_window_screenshot(Meta.Display display, Meta.Window? window, Clutter.KeyEvent? event, Meta.KeyBinding binding) {
+-			try {
+-				string cmd=this.settings.get_string("take-window-screenshot-cmd");
+-				if (cmd != "")
+-					Process.spawn_command_line_async(cmd);
+-			} catch (SpawnError e) {
+-				print("Error: %s\n", e.message);
+-			}
+-		}
+-
+ 		/* Binding for clear-notifications activated */
+ 		void on_raven_notification_clear(Meta.Display display,
+ 										Meta.Window? window, Clutter.KeyEvent? event,
+@@ -455,9 +422,6 @@ namespace Budgie {
+ 
+ 			/* Custom keybindings */
+ 			display.add_keybinding("clear-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_clear);
+-			display.add_keybinding("take-full-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_full_screenshot);
+-			display.add_keybinding("take-region-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_region_screenshot);
+-			display.add_keybinding("take-window-screenshot", settings, Meta.KeyBindingFlags.NONE, on_take_window_screenshot);
+ 			display.add_keybinding("toggle-raven", settings, Meta.KeyBindingFlags.NONE, on_raven_main_toggle);
+ 			display.add_keybinding("toggle-notifications", settings, Meta.KeyBindingFlags.NONE, on_raven_notification_toggle);
+ 			display.overlay_key.connect(on_overlay_key);
+-- 
+2.33.1
+

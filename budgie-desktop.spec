@@ -9,7 +9,7 @@
 Name:		budgie-desktop
 Version:	10.5.3
 %if 0%{?_git_release:1}
-Release:	2.%{shortcommit}%{?dist}
+Release:	3.%{shortcommit}%{?dist}
 %else
 Release:	1%{?dist}
 %endif
@@ -33,6 +33,8 @@ Source0: %{name}-%{commit}.tar.xz
 %else
 Source0: https://github.com/solus-project/budgie-desktop/releases/download/v%{?version}/budgie-desktop-v%{?version}.tar.xz
 %endif
+Source2:  0001-remove-screenshot-keybinds.patch
+Source3:   0002-default-wallpaper.patch
 
 BuildRequires:	pkgconfig(accountsservice) >= 0.6.55
 BuildRequires:	pkgconfig(ibus-1.0) >= 1.5.10
@@ -79,6 +81,7 @@ BuildRequires:	gtk-doc
 BuildRequires:	sassc
 BuildRequires:	mesa-libEGL-devel
 BuildRequires:	glibc-langpack-en
+BuildRequires:  git
 
 Requires:	hicolor-icon-theme
 Requires:	gnome-session
@@ -138,6 +141,10 @@ Requires:	%{name}%{?_isa} = %{version}-%{release}
 %else
 %autosetup
 %endif
+
+# Patching automatically doesn't work for some reason
+git apply %{SOURCE2}
+git apply %{SOURCE3}
 
 %build
 export LC_ALL=en_US.utf8
@@ -225,6 +232,10 @@ fi
 %{_datadir}/vala/vapi/budgie-1.0.*
 
 %changelog
+* Mon Dec 06 2021 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-3
+- Patch to remove GNOME Screenshot keybindings due to conflicts
+- Patch for setting default wallpaper
+
 * Fri Apr 16 2021 Thomas Batten <stenstorpmc@gmail.com> - 10.5.2-2
 - Support building git releases when '_git_release' is defined as '1'
 - Add support for Fedora 34; '_git_release' defined as 1
