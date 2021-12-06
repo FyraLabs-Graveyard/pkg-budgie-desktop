@@ -155,7 +155,7 @@ export LC_ALL=en_US.utf8
 export LC_ALL=en_US.utf8
 %meson_install
 find %{buildroot} -name '*.la' -delete
-rm %{buildroot}%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
+#rm %{buildroot}%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
 %find_lang %{name}
 
 %post
@@ -212,7 +212,7 @@ fi
 
 %files schemas
 %{_datadir}/glib-2.0/schemas/com.solus-project.*.gschema.xml
-######%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
+%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
 
 %files libs
 %{_libdir}/libbudgie*.so.*
