@@ -33,8 +33,8 @@ Source0: %{name}-%{commit}.tar.xz
 %else
 Source0: https://github.com/solus-project/budgie-desktop/releases/download/v%{?version}/budgie-desktop-v%{?version}.tar.xz
 %endif
-Source2:  0001-remove-screenshot-keybinds.patch
-Source3:   0002-default-wallpaper.patch
+Source2:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0001-remove-screenshot-keybinds.patch
+Source3:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0002-default-wallpaper.patch
 
 
 Source11: 10_ultramarine-budgie.gschema.override
@@ -224,6 +224,8 @@ fi
 %files schemas
 %{_datadir}/glib-2.0/schemas/com.solus-project.*.gschema.xml
 %{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
+%{_datadir}/glib-2.0/schemas/10_ultramarine-budgie.gschema.override
+%{_datadir}/budgie-desktop/layouts/ultramarine-marina.layout
 
 %files libs
 %{_libdir}/libbudgie*.so.*
