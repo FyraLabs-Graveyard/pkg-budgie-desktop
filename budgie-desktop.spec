@@ -3,7 +3,7 @@
 %undefine _disable_source_fetch
 %global _git_release 1
 
-%global commit 26cde8fd300a87aba0d085ca50c89728150138d2
+%global commit 9f26e39d118cfcd232473e62469bb9ebaeac2501
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
@@ -29,14 +29,20 @@ URL:		https://github.com/solus-project/budgie-desktop
 #    cd ..
 #    mv budgie-desktop budgie-desktop-%{shortcommit}
 #    tar -cJvf budgie-desktop-%{shortcommit}.tar.xz budgie-desktop-%{shortcommit}
-Source0: %{name}-%{commit}.tar.xz
+Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/archive/%{commit}.tar.gz
 %else
-Source0: https://github.com/solus-project/budgie-desktop/releases/download/v%{?version}/budgie-desktop-v%{?version}.tar.xz
+Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/releases/download/v%{version}/budgie-desktop-v%{version}.tar.xz
 %endif
+
+# the submodules are not included in the source tarball, so we need to download them
+# and add them to the source list
+
 Source2:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0001-remove-screenshot-keybinds.patch
 Source3:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0002-default-wallpaper.patch
 
-
+%if 0%{?_git_release:1}
+Source4:   https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/c5ab6037f460406ac9799b1e5765de3ce0097a8b/libgnome-volume-control-c5ab6037f460406ac9799b1e5765de3ce0097a8b.tar.gz
+%endif
 Source11: 10_ultramarine-budgie.gschema.override
 Source15: ultramarine-marina.layout
 
@@ -143,6 +149,8 @@ Requires:	%{name}%{?_isa} = %{version}-%{release}
 %prep
 %if 0%{?_git_release:1}
 %autosetup -n %{name}-%{commit}
+# Extract the submodules to subprojects
+tar -xvzf %{SOURCE4} --strip-components=1 --no-same-owner -C subprojects/gvc
 %else
 %autosetup
 %endif
@@ -236,6 +244,13 @@ fi
 
 %files docs
 %{_datadir}/gtk-doc/html/budgie-desktop/
+%{_datadir}/man/man1/budgie-daemon.1.gz
+%{_datadir}/man/man1/budgie-desktop-settings.1.gz
+%{_datadir}/man/man1/budgie-desktop.1.gz
+%{_datadir}/man/man1/budgie-panel.1.gz
+%{_datadir}/man/man1/budgie-polkit-dialog.1.gz
+%{_datadir}/man/man1/budgie-run-dialog.1.gz
+%{_datadir}/man/man1/budgie-wm.1.gz
 
 %files devel
 %{_includedir}/budgie-desktop/
@@ -245,6 +260,10 @@ fi
 %{_datadir}/vala/vapi/budgie-1.0.*
 
 %changelog
+* Tue Jan 11 2022 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-4- 9f26e39d118
+- Update spec file to properly handle submodules
+- Documentation is now properly installed
+
 * Mon Dec 06 2021 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-3
 - Patch to remove GNOME Screenshot keybindings due to conflicts
 - Patch for setting default wallpaper
