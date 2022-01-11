@@ -9,13 +9,13 @@
 Name:		budgie-desktop
 Version:	10.5.3
 %if 0%{?_git_release:1}
-Release:	3.%{shortcommit}%{?dist}
+Release:	4.%{shortcommit}%{?dist}
 %else
 Release:	1%{?dist}
 %endif
 License:	GPLv2 and LGPLv2.1
 Summary:	An elegant desktop with GNOME integration
-URL:		https://github.com/solus-project/budgie-desktop
+URL:		https://github.com/BuddiesOfBudgie/budgie-desktop
 
 %if 0%{?_git_release:1}
 # The source for this package was pulled from upstream's vcs.  Use the
