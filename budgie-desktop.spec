@@ -97,7 +97,7 @@ BuildRequires:  git
 Requires:	hicolor-icon-theme
 Requires:	gnome-session
 Requires:	gnome-settings-daemon
-Requires:	control-center
+Requires:	budgie-control-center
 Requires:	network-manager-applet
 
 Requires:	%{name}-libs
