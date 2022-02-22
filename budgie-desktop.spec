@@ -261,7 +261,7 @@ fi
 
 %changelog
 * Tue Feb 22 2022 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-4.%{shortcommit}.um35
-- Support for GNOME 41
+- Support for GNOME 42
 
 * Tue Jan 11 2022 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-4- 9f26e39d118
 - Update spec file to properly handle submodules
