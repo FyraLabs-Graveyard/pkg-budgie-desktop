@@ -67,7 +67,11 @@ BuildRequires:	pkgconfig(upower-glib) >= 0.99.0
 BuildRequires:	vala >= 0.48.0
 BuildRequires:  cmake
 
-%if 0%{?fedora} >= 35
+%if 0%{?fedora} >= 36
+BuildRequires:	pkgconfig(libmutter-10) >= 3.36.0
+%endif
+
+%if 0%{?fedora} == 35
 BuildRequires:	pkgconfig(libmutter-9) >= 3.36.0
 %endif
 
