@@ -3,7 +3,7 @@
 %undefine _disable_source_fetch
 %global _git_release 1
 
-%global commit 9f26e39d118cfcd232473e62469bb9ebaeac2501
+%global commit 314132131a46b9ba57b68848c5b32a475034c917
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
@@ -260,6 +260,9 @@ fi
 %{_datadir}/vala/vapi/budgie-1.0.*
 
 %changelog
+* Tue Feb 22 2022 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-4.%{shortcommit}.um35
+- Support for GNOME 41
+
 * Tue Jan 11 2022 Cappy Ishihara <cappy@cappuchino.xyz> - 10.5.3-4- 9f26e39d118
 - Update spec file to properly handle submodules
 - Documentation is now properly installed
