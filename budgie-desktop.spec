@@ -219,6 +219,7 @@ fi
 %{_datadir}/icons/hicolor/scalable/status/caps-lock-symbolic.svg
 %{_datadir}/icons/hicolor/scalable/status/num-lock-symbolic.svg
 %{_datadir}/xsessions/budgie-desktop.desktop
+%{_datadir}/budgie/budgie-version.xml
 
 %files schemas
 %{_datadir}/glib-2.0/schemas/com.solus-project.*.gschema.xml
