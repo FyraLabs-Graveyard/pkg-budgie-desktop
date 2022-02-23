@@ -3,7 +3,7 @@
 %undefine _disable_source_fetch
 %global _git_release 1
 
-%global commit 314132131a46b9ba57b68848c5b32a475034c917
+%global commit 8ec06a14135520105254d3fe23571d2c0c713e34
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
@@ -18,17 +18,7 @@ Summary:	An elegant desktop with GNOME integration
 URL:		https://github.com/BuddiesOfBudgie/budgie-desktop
 
 %if 0%{?_git_release:1}
-# The source for this package was pulled from upstream's vcs.  Use the
-# following commands to generate the tarball:
-#    git clone https://github.com/solus-project/budgie-desktop
-#    cd budgie-desktop
-#    git checkout %{commit}
-#    git submodule init
-#    git submodule update
-#    rm -rf .git subprojects/gvc/.git subprojects/translations/.git
-#    cd ..
-#    mv budgie-desktop budgie-desktop-%{shortcommit}
-#    tar -cJvf budgie-desktop-%{shortcommit}.tar.xz budgie-desktop-%{shortcommit}
+# The source used to be generated from a git repository, but now Ultramarine's spec file can also download the submodules properly :D
 Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/archive/%{commit}.tar.gz
 %else
 Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/releases/download/v%{version}/budgie-desktop-v%{version}.tar.xz
@@ -37,8 +27,8 @@ Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/releases/download/v%{
 # the submodules are not included in the source tarball, so we need to download them
 # and add them to the source list
 
-Source2:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0001-remove-screenshot-keybinds.patch
-Source3:   https://gitlab.ultramarine-linux.org/dist-pkgs/budgie-desktop/budgie-desktop/-/raw/lapis/0002-default-wallpaper.patch
+Patch1:   0001-remove-screenshot-keybinds.patch
+Patch2:   0002-default-wallpaper.patch
 
 %if 0%{?_git_release:1}
 Source4:   https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/c5ab6037f460406ac9799b1e5765de3ce0097a8b/libgnome-volume-control-c5ab6037f460406ac9799b1e5765de3ce0097a8b.tar.gz
@@ -152,16 +142,13 @@ Requires:	%{name}%{?_isa} = %{version}-%{release}
 
 %prep
 %if 0%{?_git_release:1}
-%autosetup -n %{name}-%{commit}
+%autosetup -p1 -n %{name}-%{commit}
 # Extract the submodules to subprojects
 tar -xvzf %{SOURCE4} --strip-components=1 --no-same-owner -C subprojects/gvc
 %else
 %autosetup
 %endif
 
-# Patching automatically doesn't work for some reason
-git apply %{SOURCE2}
-git apply %{SOURCE3}
 
 %build
 export LC_ALL=en_US.utf8

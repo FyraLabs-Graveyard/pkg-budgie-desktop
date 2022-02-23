@@ -1,14 +1,14 @@
-From 8f38996323ce6ab82884ad44f5db6f6236afd917 Mon Sep 17 00:00:00 2001
+From 949141d8c4d012f0ea2034e080ff48a3a7862983 Mon Sep 17 00:00:00 2001
 From: Cappy Ishihara <cappy@cappuchino.xyz>
-Date: Mon, 6 Dec 2021 19:39:20 +0700
-Subject: [PATCH] default wallpaper
+Date: Wed, 23 Feb 2022 09:45:59 +0700
+Subject: [PATCH] default background
 
 ---
  src/wm/20_solus-project.budgie.wm.gschema.override | 4 ++--
  1 file changed, 2 insertions(+), 2 deletions(-)
 
 diff --git a/src/wm/20_solus-project.budgie.wm.gschema.override b/src/wm/20_solus-project.budgie.wm.gschema.override
-index 3acab2e0..0a4a4be7 100644
+index 734eaa8e..e1787953 100644
 --- a/src/wm/20_solus-project.budgie.wm.gschema.override
 +++ b/src/wm/20_solus-project.budgie.wm.gschema.override
 @@ -3,13 +3,13 @@ edge-tiling = true
@@ -16,17 +16,17 @@ index 3acab2e0..0a4a4be7 100644
  
  [org.gnome.desktop.background:Budgie]
 -picture-uri = 'file:///usr/share/backgrounds/budgie/default.jpg'
-+picture-uri = 'file:///usr/share/backgrounds/ultramarine/default/default.jpg'
++picture-uri = 'file:///usr/share/backgrounds/ultramarine-linux/default/default.jpg'
  
  [org.gnome.desktop.wm.preferences:Budgie]
  button-layout = 'appmenu:minimize,maximize,close'
  
  [org.gnome.desktop.screensaver:Budgie]
 -picture-uri = 'file:///usr/share/backgrounds/budgie/default.jpg'
-+picture-uri = 'file:///usr/share/backgrounds/ultramarine/default/default.jpg'
++picture-uri = 'file:///usr/share/backgrounds/ultramarine-linux/default/default.jpg'
  
  [org.gnome.desktop.wm.keybindings:Budgie]
- switch-input-source = '[\'<Alt>Shift_L\', \'<Super>space\', \'XF86Keyboard\']'
+ switch-input-source = ['<Alt>Shift_L', '<Super>space', 'XF86Keyboard']
 -- 
-2.33.1
+2.35.1
 
