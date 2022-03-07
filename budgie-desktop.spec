@@ -1,14 +1,14 @@
 %global _hardened_build 1
 %global _vpath_builddir build
 %undefine _disable_source_fetch
-%global _git_release 1
+%global _git_release 0
 
 %global commit 8ec06a14135520105254d3fe23571d2c0c713e34
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
-Version:	10.5.3
-%if 0%{?_git_release:1}
+Version:	10.6
+%if 0%{?_git_release} == 1
 Release:	4.%{shortcommit}%{?dist}
 %else
 Release:	1%{?dist}
