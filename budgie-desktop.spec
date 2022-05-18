@@ -11,7 +11,7 @@ Version:	10.6.1
 %if 0%{?_git_release} == 1
 Release:	4.%{shortcommit}%{?dist}
 %else
-Release:	1%{?dist}
+Release:	2%{?dist}
 %endif
 License:	GPLv2 and LGPLv2.1
 Summary:	An elegant desktop with GNOME integration
@@ -27,14 +27,11 @@ Source0: https://github.com/BuddiesOfBudgie/budgie-desktop/releases/download/v%{
 # the submodules are not included in the source tarball, so we need to download them
 # and add them to the source list
 
-Patch1:   0001-remove-screenshot-keybinds.patch
-Patch2:   0002-default-wallpaper.patch
-
 %if 0%{?_git_release:1}
 Source4:   https://gitlab.gnome.org/GNOME/libgnome-volume-control/-/archive/c5ab6037f460406ac9799b1e5765de3ce0097a8b/libgnome-volume-control-c5ab6037f460406ac9799b1e5765de3ce0097a8b.tar.gz
 %endif
-Source11: 10_ultramarine-budgie.gschema.override
-Source15: ultramarine-marina.layout
+#Source11: 10_ultramarine-budgie.gschema.override
+#Source15: ultramarine-marina.layout
 
 
 BuildRequires:	pkgconfig(accountsservice) >= 0.6.55
@@ -162,10 +159,10 @@ find %{buildroot} -name '*.la' -delete
 #rm %{buildroot}%{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
 %find_lang %{name}
 
-mkdir -p %{buildroot}%{_datadir}/glib-2.0/schemas/
-install %{SOURCE11} %{buildroot}%{_datadir}/glib-2.0/schemas/
-mkdir -p %{buildroot}%{_datadir}/budgie-desktop/layouts/
-install %{SOURCE15} %{buildroot}%{_datadir}/budgie-desktop/layouts/
+#mkdir -p %{buildroot}%{_datadir}/glib-2.0/schemas/
+#install %{SOURCE11} %{buildroot}%{_datadir}/glib-2.0/schemas/
+#mkdir -p %{buildroot}%{_datadir}/budgie-desktop/layouts/
+#install %{SOURCE15} %{buildroot}%{_datadir}/budgie-desktop/layouts/
 
 
 %post
@@ -224,8 +221,6 @@ fi
 %files schemas
 %{_datadir}/glib-2.0/schemas/com.solus-project.*.gschema.xml
 %{_datadir}/glib-2.0/schemas/20_solus-project.budgie.wm.gschema.override
-%{_datadir}/glib-2.0/schemas/10_ultramarine-budgie.gschema.override
-%{_datadir}/budgie-desktop/layouts/ultramarine-marina.layout
 
 %files libs
 %{_libdir}/libbudgie*.so.*
