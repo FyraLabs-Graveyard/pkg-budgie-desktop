@@ -7,7 +7,7 @@
 %global shortcommit %(c=%{commit}; echo ${c:0:7})
 
 Name:		budgie-desktop
-Version:	10.6.2
+Version:	10.6.3
 %if 0%{?_git_release} == 1
 Release:	4.%{shortcommit}%{?dist}
 %else
