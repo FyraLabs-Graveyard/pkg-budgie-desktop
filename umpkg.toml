@@ -1,5 +1,5 @@
 [budgie-desktop]
-spec = "budgie-desktop.spec"
+spec = "pkg-budgie-desktop.spec"
 build_script = ""
 build_method = "mock"
 owner = "cappy"
